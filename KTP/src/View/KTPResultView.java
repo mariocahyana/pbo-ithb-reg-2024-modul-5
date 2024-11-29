@@ -15,7 +15,7 @@ public class KTPResultView extends JFrame {
         setTitle("Hasil Data KTP");
         setSize(500, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(16, 1, 10, 10)); // Menambahkan baris untuk gambar
+        setLayout(new GridLayout(16, 1, 10, 10));
 
         add(new JLabel("Provinsi Jawa Barat"));
         add(new JLabel("Republik Harapan Bangsa"));
@@ -78,14 +78,13 @@ public class KTPResultView extends JFrame {
         berlakuHinggaLabel.setText("Berlaku Hingga: " + berlakuHingga);
         kotaTanggalPembuatanLabel.setText("Kota/Tanggal Pembuatan: " + kotaTanggalPembuatan);
 
-        // Menampilkan Foto
         if (fotoPath != null && !fotoPath.isEmpty()) {
             File fotoFile = new File(fotoPath);
             if (fotoFile.exists()) {
                 ImageIcon fotoIcon = new ImageIcon(fotoPath);
                 Image scaledImage = fotoIcon.getImage().getScaledInstance(100, 120, Image.SCALE_SMOOTH);
                 fotoLabel.setIcon(new ImageIcon(scaledImage));
-                fotoLabel.setText(""); // Menghapus teks default
+                fotoLabel.setText("");
             } else {
                 fotoLabel.setText("Foto tidak ditemukan!");
             }
@@ -93,14 +92,13 @@ public class KTPResultView extends JFrame {
             fotoLabel.setText("Foto belum diunggah!");
         }
 
-        // Menampilkan Tanda Tangan
         if (tandaTanganPath != null && !tandaTanganPath.isEmpty()) {
             File tandaTanganFile = new File(tandaTanganPath);
             if (tandaTanganFile.exists()) {
                 ImageIcon tandaTanganIcon = new ImageIcon(tandaTanganPath);
                 Image scaledImage = tandaTanganIcon.getImage().getScaledInstance(100, 50, Image.SCALE_SMOOTH);
                 tandaTanganLabel.setIcon(new ImageIcon(scaledImage));
-                tandaTanganLabel.setText(""); // Menghapus teks default
+                tandaTanganLabel.setText("");
             } else {
                 tandaTanganLabel.setText("Tanda tangan tidak ditemukan!");
             }
