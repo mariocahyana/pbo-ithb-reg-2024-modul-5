@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class KTPResultView extends JFrame {
     private JLabel nikLabel, namaLabel, tempatTanggalLahirLabel, jenisKelaminLabel, golDarahLabel;
@@ -14,9 +15,9 @@ public class KTPResultView extends JFrame {
         setTitle("Hasil Data KTP");
         setSize(500, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(15, 1, 10, 10));
+        setLayout(new GridLayout(16, 1, 10, 10)); // Menambahkan baris untuk gambar
 
-        add(new JLabel("Provinsi DKI Jakarta, Jakarta Barat"));
+        add(new JLabel("Provinsi Jawa Barat"));
         add(new JLabel("Republik Harapan Bangsa"));
 
         nikLabel = new JLabel();
@@ -34,8 +35,8 @@ public class KTPResultView extends JFrame {
         kewarganegaraanLabel = new JLabel();
         berlakuHinggaLabel = new JLabel();
         kotaTanggalPembuatanLabel = new JLabel();
-        fotoLabel = new JLabel("Foto: (Ditampilkan)");
-        tandaTanganLabel = new JLabel("Tanda Tangan: (Ditampilkan)");
+        fotoLabel = new JLabel();
+        tandaTanganLabel = new JLabel();
 
         add(new JLabel("Data KTP:"));
         add(nikLabel);
@@ -76,7 +77,35 @@ public class KTPResultView extends JFrame {
         kewarganegaraanLabel.setText("Kewarganegaraan: " + kewarganegaraan);
         berlakuHinggaLabel.setText("Berlaku Hingga: " + berlakuHingga);
         kotaTanggalPembuatanLabel.setText("Kota/Tanggal Pembuatan: " + kotaTanggalPembuatan);
-        fotoLabel.setText("Foto: " + fotoPath);
-        tandaTanganLabel.setText("Tanda Tangan: " + tandaTanganPath);
+
+        // Menampilkan Foto
+        if (fotoPath != null && !fotoPath.isEmpty()) {
+            File fotoFile = new File(fotoPath);
+            if (fotoFile.exists()) {
+                ImageIcon fotoIcon = new ImageIcon(fotoPath);
+                Image scaledImage = fotoIcon.getImage().getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+                fotoLabel.setIcon(new ImageIcon(scaledImage));
+                fotoLabel.setText(""); // Menghapus teks default
+            } else {
+                fotoLabel.setText("Foto tidak ditemukan!");
+            }
+        } else {
+            fotoLabel.setText("Foto belum diunggah!");
+        }
+
+        // Menampilkan Tanda Tangan
+        if (tandaTanganPath != null && !tandaTanganPath.isEmpty()) {
+            File tandaTanganFile = new File(tandaTanganPath);
+            if (tandaTanganFile.exists()) {
+                ImageIcon tandaTanganIcon = new ImageIcon(tandaTanganPath);
+                Image scaledImage = tandaTanganIcon.getImage().getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+                tandaTanganLabel.setIcon(new ImageIcon(scaledImage));
+                tandaTanganLabel.setText(""); // Menghapus teks default
+            } else {
+                tandaTanganLabel.setText("Tanda tangan tidak ditemukan!");
+            }
+        } else {
+            tandaTanganLabel.setText("Tanda tangan belum diunggah!");
+        }
     }
 }
